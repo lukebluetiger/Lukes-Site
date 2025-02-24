@@ -1,0 +1,107 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+.pnp
+.pnp.js
+
+# Build outputs
+/build
+/dist
+*.tsbuildinfo
+.next/
+out/
+
+# .NET build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio files
+.vs/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Testing
+/coverage
+.nyc_output
+TestResults/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Cache files
+.eslintcache
+.cache/
+.tailwind-cache/
+
+# Logs
+logs/
+*.log
+
+# IDE specific files
+.idea/
+*.swp
+*.swo
+
+# Project specific
+/wwwroot/blog-images/*
+!/wwwroot/blog-images/.gitkeep
+
+# Source map files
+*.map
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Secrets
+secrets/
+*.key
+*.pem
+
+# Documentation
+docs/
+documentation/
+
+# Yarn
+.yarn/cache
+
+# SQLite
+*.sqlite
+*.sqlite3
+
+# Tailwind JIT
+.tailwind-cache/
+
+# Build artifacts in public
+public/build/

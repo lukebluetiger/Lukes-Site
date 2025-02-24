@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+/* 1. Font Definitions */
+@font-face {
+    font-family: 'Windows-XP-Tahoma';
+    src: url('../fonts/windows-xp-tahoma.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 2. Base Styles & Reset */
+body, html {
+    margin: 0;
+    height: 100%;
+    background-color: #2B3B40;
+    color: #bdedbb;
+    font-family: "Windows-XP-Tahoma", Arial, sans-serif;
+    font-size: 23px;
+}
+
+#root {
+    height: 100%;
+}
+
+/* 3. Layout Components */
+main {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.Home {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* 4. Typography */
+h1, h2 {
+    color: #bdedbb;
+    font-weight: 300;
+}
+
+p {
+    color: #9EEFE1;
+    padding: 10px 0;
+}
+
+/* 5. Lists */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+li {
+    display: flex;
+    border-bottom: 1px solid #232d31;
+    margin-bottom: 0;
+    padding: 10px 0;
+}
+
+/* 6. Forms & Inputs */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #232d31;
+    background-color: #232f32;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+form div {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #bdedbb;
+}
+
+input[type="text"], 
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #232d31;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: #ddd;
+    font-family: 'Windows-XP-Tahoma';
+    background-color: #12232b;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #3f5259;
+    outline: none;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* 7. Buttons */
+button {
+    font-family: 'Windows-XP-Tahoma';
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #1a4856;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0f252c;
+}
+
+button:active {
+    background-color: #1a4856;
+}
+
+/* 8. Decorative Elements */
+.pixelated-border,
+.border {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+    padding: 20px;
+    position: relative;
+}
+
+.border {
+    /* Using multiple box-shadows for a pixelated effect */
+    box-shadow: 
+        0 0 0 4px #000,
+        8px 0 0 0 #000,
+        -8px 0 0 0 #000,
+        0 8px 0 0 #000,
+        0 -8px 0 0 #000,
+        8px 8px 0 0 #000,
+        -8px -8px 0 0 #000,
+        8px -8px 0 0 #000,
+        -8px 8px 0 0 #000;
+}
+
+.border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Optional: Additional styling or border effects */
+    pointer-events: none;
+}
+
+/* Using SVG border-image */
+.svg-pixelated-border {
+    border: 20px solid transparent; /* Adjust thickness as needed */
+    border-image: url('/images/pixel-border.svg') 10 repeat; /* Ensure the path is correct */
+    padding: 20px;
+    position: relative;
+    background-color: #fff;
+}
+
+/* 9. Modal Styles */
+dialog:modal {
+    background: none !important;
+    border: 0px;
+    inset: 0px;
+    padding: 0px;
+    width: 500px;
+}
+
+/* 10. Code Block */
+.code-block {
+    font-family: 'Windows-XP-Tahoma', Courier, monospace !important;
+    background-color: #072134 !important;
+    padding: 12px !important; 
+    margin: 10px !important;  
+    border-color: #0b324c !important;
+    border-radius: 5px !important;
+
+    /* Refined pixel effect shadow */
+    box-shadow: 
+        -3px 2px 2px 4px #0b324c,  
+        -6px 0 0 4px #0b324c,    
+        3px 0 0 4px #0b324c,     
+        6px 0 0 4px #0b324c !important;
+    
+    float: left;
+    width: fit-content;        /* Only as wide as needed */
+    max-width: 100%;           /* Prevent overflow */
+    overflow-x: auto;          /* Scrollable if needed */
+}
+
+.code-block code {
+    font-family: 'Windows-XP-Tahoma', Courier, monospace !important;
+    display: block;
+    line-height: 1.5 !important;        /* Better line spacing */
+    font-size: 25px !important; 
+}

@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lukes-site.Server", "lukes-site.Server\lukes-site.Server.csproj", "{C06E8E9C-86E7-4008-BAAA-33620385167F}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "lukes-site.client", "lukes-site.client\lukes-site.client.esproj", "{77255AAD-7F7F-429C-A93A-4D95156F69AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C06E8E9C-86E7-4008-BAAA-33620385167F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C06E8E9C-86E7-4008-BAAA-33620385167F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C06E8E9C-86E7-4008-BAAA-33620385167F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C06E8E9C-86E7-4008-BAAA-33620385167F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77255AAD-7F7F-429C-A93A-4D95156F69AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77255AAD-7F7F-429C-A93A-4D95156F69AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77255AAD-7F7F-429C-A93A-4D95156F69AD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{77255AAD-7F7F-429C-A93A-4D95156F69AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77255AAD-7F7F-429C-A93A-4D95156F69AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77255AAD-7F7F-429C-A93A-4D95156F69AD}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE666D50-FCAF-482C-B7A9-B92B46C7576D}
+	EndGlobalSection
+EndGlobal

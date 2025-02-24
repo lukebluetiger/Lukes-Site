@@ -1,0 +1,6 @@
+@lukes_site.Server_HostAddress = http://localhost:5062
+
+GET {{lukes_site.Server_HostAddress}}/
+Accept: application/json
+
+###

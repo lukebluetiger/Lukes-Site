@@ -1,0 +1,47 @@
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import * as signalR from '@microsoft/signalr';
+
+const SignalRContext = createContext();
+
+export const SignalRProvider = ({ children }) => {
+    const [userCount, setUserCount] = useState(0);
+    const [connection, setConnection] = useState(null);
+
+    useEffect(() => {
+        const newConnection = new signalR.HubConnectionBuilder()
+            .withUrl('/hubs/userCountHub') // Proxy handles routing to backend
+            .withAutomaticReconnect()
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+
+        setConnection(newConnection);
+    }, []);
+
+    useEffect(() => {
+        if (connection) {
+            connection
+                .start()
+                .then(() => {
+                    console.log('Connected to SignalR hub');
+
+                    connection.on('UpdateUserCount', (count) => {
+                        setUserCount(count);
+                    });
+                })
+                .catch((err) => console.error('Connection failed: ', err));
+
+            // Clean up on unmount
+            return () => {
+                connection.stop();
+            };
+        }
+    }, [connection]);
+
+    return (
+        <SignalRContext.Provider value={{ userCount }}>
+            {children}
+        </SignalRContext.Provider>
+    );
+};
+
+export const useSignalR = () => useContext(SignalRContext);

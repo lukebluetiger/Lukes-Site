@@ -1,0 +1,14 @@
+{
+  "slug": "personal-portfolio",
+  "title": "Personal Portfolio & Blog",
+  "summary": "A modern web application built with React and .NET, featuring a personal blog, project showcase, and custom CMS. Implements a clean, responsive design with dynamic content management and tag-based navigation.",
+  "technologies": "React,C#,.NET,Tailwind CSS,SQL Server,Entity Framework,REST API",
+  "githubUrl": "https://github.com/lukebluetiger/React-Site",
+  "liveUrl": "https://lukebluetiger.dev",
+  "coverImageUrl": "./images/portfolio-screenshot.png",
+  "coverImageAlt": "Luke's Portfolio Website Screenshot",
+  "features": "Custom blog system with tag-based navigation,Project portfolio with filterable showcase,Responsive design with dark theme,Full-stack implementation with .NET backend,Content management system for blog posts",
+  "status": "In Development",
+  "startDate": "2024-02-15T00:00:00",
+  "description": "A personal portfolio website that serves as both a project showcase and blogging platform. Built with React for the frontend, utilizing Tailwind CSS for styling, and backed by a .NET API with SQL Server database. Features include a custom blog system with tag filtering, project showcase, and responsive design optimized for all devices."
+}
