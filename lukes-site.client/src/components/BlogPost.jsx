@@ -75,9 +75,11 @@ const BlogPost = () => {
 
     if (error) {
         return (
-            <div className="min-h-screen bg-[#2B3B40] flex items-center justify-center">
-                <p className="text-red-500">{error}</p>
+            <div className="flex-grow container mx-auto px-4 py-8 max-w-4xl">
+            <div className="bg-red-900/30 text-red-200 p-4 rounded-lg">
+              {error}
             </div>
+          </div>
         );
     }
 

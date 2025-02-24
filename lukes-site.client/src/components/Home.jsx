@@ -13,7 +13,7 @@ function Home() {
                 </div>
                 <h1 className="flex items-center gap-4 font-light mt-8">
                     <img src={finger1} alt="finger pointing" className="h-8 w-8" />
-                    welcome to my playground!
+                    welcome to my site!
                     <img src={finger2} alt="finger pointing" className="h-8 w-8" />
                 </h1>
 

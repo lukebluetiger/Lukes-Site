@@ -19,6 +19,11 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/blog/tag/:tag" element={<BlogPosts />} />
         <Route path="/blog/post/:slug" element={<BlogPost />} />
+        <Route path='*' element={      <div className="flex-grow container mx-auto px-4 py-8 max-w-4xl">
+        <div className="bg-red-900/30 text-red-200 p-4 rounded-lg">
+          404 - Not Found
+        </div>
+      </div>} />
         </Route>
       </Routes>
     </Router>
