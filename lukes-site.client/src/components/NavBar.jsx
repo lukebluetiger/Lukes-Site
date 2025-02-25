@@ -76,13 +76,6 @@ function NavBar() {
                     >
                         blog
                     </Link>
-                    <Link
-                        to="/fun"
-                        className="block py-2 hover:italic hover:bg-[#161f21] transition-colors duration-200 no-underline"
-                        onClick={() => setIsMenuOpen(false)}
-                    >
-                        fun
-                    </Link>
                 </nav>
             )}
         </div>
