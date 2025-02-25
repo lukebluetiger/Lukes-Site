@@ -7,6 +7,7 @@ import Projects from './components/Projects';
 import BlogPost from './components/BlogPost'; // This will be the component to show a single post
 import BlogPosts from './components/BlogPosts'; // This will be the component to index blog posts
 import Layout from './components/Layout';
+import AnimationApp from './components/fun/AnimationApp';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/blog/tag/:tag" element={<BlogPosts />} />
         <Route path="/blog/post/:slug" element={<BlogPost />} />
+        <Route path="/fun/animate" element={<AnimationApp />} />
         <Route path='*' element={      <div className="flex-grow container mx-auto px-4 py-8 max-w-4xl">
         <div className="bg-red-900/30 text-red-200 p-4 rounded-lg">
           404 - Not Found
