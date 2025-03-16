@@ -44,8 +44,8 @@ builder.Services.AddCors(options => {
                 "https://localhost:7116",
                 "http://localhost:5173", 
                 "http://localhost:7116",
-                // Add your production URL here
-                "https://your-production-domain.com"
+                // temp azure URL  
+                "https://lukes-site.azurewebsites.net"
             )
             .AllowAnyHeader()
             .AllowAnyMethod()
@@ -74,6 +74,7 @@ app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseDefaultFiles();
 
 app.UseCors("AllowReactApp");
 

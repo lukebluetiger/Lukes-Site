@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
-const Tag = ({ name, isActive }) => {
+const Tag = ({ name, isActive = false}) => {
   const location = useLocation();
-  const basePath = location.pathname.includes('/project') ? '/project/tag/' : '/blog/tag/';
+  const basePath = location.pathname.includes('/project') ? '/projects/tag/' : '/blog/tag/';
 
   return (
     <Link
@@ -23,10 +23,6 @@ const Tag = ({ name, isActive }) => {
 Tag.propTypes = {
   name: PropTypes.string.isRequired,
   isActive: PropTypes.bool
-};
-
-Tag.defaultProps = {
-  isActive: false
 };
 
 export default Tag;

@@ -105,3 +105,4 @@ documentation/
 
 # Build artifacts in public
 public/build/
+.fake

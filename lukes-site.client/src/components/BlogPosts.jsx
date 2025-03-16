@@ -77,11 +77,13 @@ const BlogPosts = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('http://localhost:5062/api/BlogPosts');
+        console.log('API URL:', import.meta.env.BACKEND_URL);
+        const response = await axios.get(`/api/BlogPosts`);
+        console.log('Response data:', response.data);
         setPosts(response.data);
       } catch (err) {
-        setError('Failed to load blog posts');
-        console.error('Error fetching blog posts:', err);
+        console.error('Error details:', err.message, err.response || 'No response data');
+        setError(`Failed to load blog posts: ${err.message}`);
       } finally {
         setLoading(false);
       }

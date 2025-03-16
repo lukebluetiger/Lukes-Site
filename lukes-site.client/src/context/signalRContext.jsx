@@ -9,7 +9,10 @@ export const SignalRProvider = ({ children }) => {
 
     useEffect(() => {
         const newConnection = new signalR.HubConnectionBuilder()
-            .withUrl('/hubs/userCountHub') // Proxy handles routing to backend
+            .withUrl('/hubs/userCountHub', {
+                skipNegotiation: true,  // skipNegotiation as we specify WebSockets
+                transport: signalR.HttpTransportType.WebSockets  // force WebSocket transport
+              })
             .withAutomaticReconnect()
             .configureLogging(signalR.LogLevel.Information)
             .build();
@@ -24,7 +27,7 @@ export const SignalRProvider = ({ children }) => {
                 .then(() => {
                     console.log('Connected to SignalR hub');
 
-                    connection.on('UpdateUserCount', (count) => {
+                    connection.on('updateusercount', (count) => {
                         setUserCount(count);
                     });
                 })

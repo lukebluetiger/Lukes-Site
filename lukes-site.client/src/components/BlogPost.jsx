@@ -13,7 +13,7 @@ const BlogPost = () => {
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const response = await axios.get(`http://localhost:5062/api/BlogPosts/${slug}`);
+                const response = await axios.get(`/api/BlogPosts/${slug}`);
                 setPost(response.data);
             } catch (err) {
                 console.error('Error fetching the blog post:', err);
@@ -60,13 +60,25 @@ const BlogPost = () => {
                     </figure>
                 );
 
-            case 'heading':
-                const HeadingTag = `h${block.level}`; // Dynamically determine the heading level
-                return (
-                    <HeadingTag className={`text-${block.level === 1 ? '5xl' : block.level === 2 ? '4xl' : block.level === 3 ? '3xl' : '2xl'} font-bold mb-4 text-[#bdedbb]`}>
-                        {block.content}
-                    </HeadingTag>
-                );
+                case 'heading':
+                    {
+                        // Make sure level is a valid number between 1-6
+                        const level = block.level && typeof block.level === 'number' && block.level >= 1 && block.level <= 6 ? block.level : 3;
+                        
+                        const fontSize = level === 1 ? 'text-5xl' : 
+                                         level === 2 ? 'text-4xl' : 
+                                         level === 3 ? 'text-3xl' : 'text-2xl';
+                        
+                        switch(level) {
+                            case 1: return <h1 className={`${fontSize} font-bold mb-4 text-[#bdedbb]`}>{block.content}</h1>;
+                            case 2: return <h2 className={`${fontSize} font-bold mb-4 text-[#bdedbb]`}>{block.content}</h2>;
+                            case 3: return <h3 className={`${fontSize} font-bold mb-4 text-[#bdedbb]`}>{block.content}</h3>;
+                            case 4: return <h4 className={`${fontSize} font-bold mb-4 text-[#bdedbb]`}>{block.content}</h4>;
+                            case 5: return <h5 className={`${fontSize} font-bold mb-4 text-[#bdedbb]`}>{block.content}</h5>;
+                            case 6: return <h6 className={`${fontSize} font-bold mb-4 text-[#bdedbb]`}>{block.content}</h6>;
+                            default: return <h3 className={`${fontSize} font-bold mb-4 text-[#bdedbb]`}>{block.content}</h3>;
+                        }
+                    }
 
             default:
                 return <ReactMarkdown>{block.content}</ReactMarkdown>;

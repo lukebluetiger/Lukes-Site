@@ -13,7 +13,7 @@ const Project = () => {
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const response = await axios.get(`http://localhost:5062/api/Projects/${slug}`);
+                const response = await axios.get(`/api/Projects/${slug}`);
                 setPost(response.data);
             } catch (err) {
                 console.error('Error fetching the blog post:', err);
@@ -94,7 +94,6 @@ const Project = () => {
                           <Tag 
                             key={tag} 
                             name={tag} 
-                            // If you prefer using onClick, you can adjust the Tag component accordingly
                           />
                         ))}
                       </div>

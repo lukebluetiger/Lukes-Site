@@ -19,7 +19,7 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:slug" element={<Project />} />
-        <Route path="/project/tag/:tag" element={<Projects />} />
+        <Route path="/projects/tag/:tag" element={<Projects />} />
         <Route path="/blog/tag/:tag" element={<BlogPosts />} />
         <Route path="/blog/post/:slug" element={<BlogPost />} />
         <Route path='*' element={      <div className="flex-grow container mx-auto px-4 py-8 max-w-4xl">
