@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Github, ExternalLink } from 'lucide-react';
-
 const ProjectCard = ({ project }) => (
 <div className="group relative bg-cyan-950/30 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-cyan-900/20">
     {/* Project Image */}
@@ -89,7 +88,7 @@ const Projects = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get('http://localhost:5062/api/Projects');
+        const response = await axios.get(`/api/Projects`);
         setProjects(response.data);
       } catch (err) {
         setError('Failed to load projects');

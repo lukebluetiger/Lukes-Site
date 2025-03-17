@@ -215,3 +215,36 @@ dialog:modal {
     line-height: 1.5 !important;        /* Better line spacing */
     font-size: 25px !important; 
 }
+
+/* 11. OCaml Syntax Highlighting */
+.code-block .keyword {
+    color: #569CD6 !important; /* Blue for keywords */
+    font-weight: bold;
+  }
+  
+  .code-block .arrow {
+    color: #C586C0 !important; /* Purple for arrows (->) */
+  }
+  
+  .code-block .string {
+    color: #CE9178 !important; /* Orange-red for strings */
+  }
+  
+  .code-block .comment {
+    color: #6A9955 !important; /* Green for comments */
+    font-style: italic;
+  }
+  
+  .code-block .function {
+    color: #DCDCAA !important; /* Light yellow for function calls */
+  }
+  
+  /* Make the rest of the code light-colored */
+  .code-block code {
+    color: #D4D4D4 !important; /* Light gray for regular text */
+  }
+
+  .code-block .comment {
+    color: #6A9955 !important; /* Green for comments */
+    font-style: italic;
+  }

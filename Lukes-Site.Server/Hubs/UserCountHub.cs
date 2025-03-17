@@ -11,7 +11,7 @@ namespace lukes_site.Server.Hubs
         public override async Task OnConnectedAsync()
         {
             _currentUserCount++;
-            await Clients.All.SendAsync("UpdateUserCount", _currentUserCount);
+            await Clients.All.SendAsync("updateusercount", _currentUserCount);
             await base.OnConnectedAsync();
         }
 
@@ -19,7 +19,7 @@ namespace lukes_site.Server.Hubs
         public override async Task OnDisconnectedAsync(System.Exception exception)
         {
             _currentUserCount--;
-            await Clients.All.SendAsync("UpdateUserCount", _currentUserCount);
+            await Clients.All.SendAsync("updateusercount", _currentUserCount);
             await base.OnDisconnectedAsync(exception);
         }
     }
