@@ -44,8 +44,8 @@ builder.Services.AddCors(options => {
                 "https://localhost:7116",
                 "http://localhost:5173", 
                 "http://localhost:7116",
-                // Add your production URL here
-                "https://your-production-domain.com"
+                // azure URL  
+                "https://lukes-dev-site.azurewebsites.net/"
             )
             .AllowAnyHeader()
             .AllowAnyMethod()
