@@ -13,8 +13,9 @@ function NavBar() {
                     <Link to="/">
                         <img
                             src="/img.jpg"
-                            alt="logo"
+                            alt="Art by uricksaladbar"
                             className="w-10 h-10 [image-rendering:pixelated]"
+                            title="Artwork by uricksaladbar"
                         />
                     </Link>
                     <Link to="/" className="text-[#34E4EA] no-underline">

@@ -3,7 +3,7 @@
   "title": "Personal Portfolio & Blog",
   "summary": "A modern web application built with React and .NET, featuring a personal blog, project showcase, and custom CMS. Implements a clean, responsive design with dynamic content management and tag-based navigation.",
   "technologies": "React,C#,.NET,Tailwind CSS,SQL Server,Entity Framework,REST API",
-  "githubUrl": "https://github.com/lukebluetiger/React-Site",
+  "githubUrl": "https://github.com/lukebluetiger/Lukes-Site",
   "liveUrl": "https://lukebluetiger.dev",
   "coverImageUrl": "./images/portfolio-screenshot.png",
   "coverImageAlt": "Luke's Portfolio Website Screenshot",

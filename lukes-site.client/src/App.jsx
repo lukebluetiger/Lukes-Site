@@ -26,7 +26,7 @@ function App() {
         <div className="bg-red-900/30 text-red-200 p-4 rounded-lg">
           404 - Not Found
         </div>
-      </div>} />
+        </div>} />
         </Route>
       </Routes>
     </Router>

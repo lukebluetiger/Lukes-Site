@@ -1,89 +1,78 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Github, ExternalLink } from 'lucide-react';
+import githubIcon from '../assets/github.png';
+import PropTypes from 'prop-types';
+import Tag from './Tag';
+
 const ProjectCard = ({ project }) => (
-<div className="group relative bg-cyan-950/30 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-cyan-900/20">
+  <div className="group relative bg-cyan-950/30 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-cyan-900/20 mx-auto max-w-md">
     {/* Project Image */}
     <div className="aspect-video w-full bg-cyan-900/20 overflow-hidden">
       {project.coverImage && (
-        <img 
-          src={project.coverImage.url} 
+        <img
+          src={project.coverImage.url}
           alt={project.coverImage.alt || project.title}
           className="w-full h-full object-cover"
         />
       )}
     </div>
-    
-
-      
+         
     {/* Project Content */}
     <div className="p-6 space-y-4">
       <h2 className="text-2xl font-semibold text-cyan-100">
         {project.title}
       </h2>
-
+      
       <p className="text-cyan-200/80 line-clamp-2">
         {project.summary}
       </p>
-
-      {/* Tech Stack */}
-      <div className="flex flex-wrap gap-2 border-t border-b border-cyan-800/20 py-4">
+      
+      {/* Tech Stack - Now using Tag component */}
+      <div className="flex flex-wrap gap-2 border-t border-b border-cyan-800/20 py-4 relative z-20">
         {project.technologies.map(tech => (
-          <span 
+          <Tag
             key={tech}
-            className="px-3 py-1 text-sm bg-cyan-800/40 text-cyan-200 rounded-full"
-          >
-            {tech}
-          </span>
+            name={tech}
+          />
         ))}
       </div>
-
+      
       {/* Links */}
-      <div className="flex gap-4 pt-2">
+      <div className="flex gap-4 pt-2 relative z-20">
         {project.githubUrl && (
-          <a 
+          <a
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-cyan-300 hover:text-cyan-200 transition-colors"
-          >
-            <Github size={20} />
+            onClick={(e) => e.stopPropagation()}
+          >                
+            <img
+                src={githubIcon}
+                alt="GitHub"
+                className="w-6 h-6 mx-auto"
+            />
             <span>Repository</span>
-          </a>
-        )}
-        {project.liveUrl && (
-          <a 
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-cyan-300 hover:text-cyan-200 transition-colors"
-          >
-            <ExternalLink size={20} />
-            <span>Live Demo</span>
           </a>
         )}
       </div>
     </div>
-
+    
     {/* Learn More Link - Overlays entire card */}
-    <Link 
+    <Link
       to={`/projects/${project.slug}`}
       className="absolute inset-0 z-10 bg-cyan-950/0 hover:bg-cyan-950/10 transition-colors"
       aria-label={`Learn more about ${project.title}`}
     />
-
-    
   </div>
-  
-  
 );
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [activeFilter, setActiveFilter] = useState('all');
+  const { tag } = useParams(); // Get tag from URL params
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -97,17 +86,17 @@ const Projects = () => {
         setLoading(false);
       }
     };
-
+    
     fetchProjects();
   }, []);
 
   // Get unique technologies from all projects
   const allTechnologies = [...new Set(projects.flatMap(project => project.technologies))];
 
-  // Filter projects based on selected technology
-  const filteredProjects = activeFilter === 'all'
-    ? projects
-    : projects.filter(project => project.technologies.includes(activeFilter));
+  // Filter projects based on selected technology from URL param
+  const filteredProjects = tag
+    ? projects.filter(project => project.technologies.includes(tag))
+    : projects;
 
   if (loading) {
     return (
@@ -128,58 +117,76 @@ const Projects = () => {
           {error}
         </div>
       </div>
-    );  
+    );
   }
 
   return (
     <main className="flex-grow container mx-auto px-4 py-8 max-w-7xl">
       <div className="space-y-8">
         <div className="flex items-center justify-between">
-          <h1 className="text-4xl font-bold text-cyan-100">Projects</h1>
+          <h1 className="text-4xl font-bold text-cyan-100">
+            {tag ? `Projects using ${tag}` : 'Projects'}
+          </h1>
+          {tag && (
+            <Link 
+              to="/projects" 
+              className="px-4 py-2 text-cyan-200 hover:text-cyan-300 transition-colors"
+            >
+              View All Projects
+            </Link>
+          )}
         </div>
-
-        {/* Technology Filter */}
+        
+        {/* Technology Filter using Tag component */}
         <div className="flex flex-wrap gap-2 py-4">
-          <span
-            onClick={() => setActiveFilter('all')}
+          <Link
+            to="/projects"
             className={`px-3 py-1 text-sm rounded-full cursor-pointer transition-colors ${
-              activeFilter === 'all'
+              !tag
                 ? 'bg-cyan-600/60 text-cyan-100'
                 : 'bg-cyan-800/40 text-cyan-200 hover:bg-cyan-700/50'
             }`}
           >
             All Projects
-          </span>
+          </Link>
           {allTechnologies.map(tech => (
-            <span
+            <Tag
               key={tech}
-              onClick={() => setActiveFilter(tech)}
-              className={`px-3 py-1 text-sm rounded-full cursor-pointer transition-colors ${
-                activeFilter === tech
-                  ? 'bg-cyan-600/60 text-cyan-100'
-                  : 'bg-cyan-800/40 text-cyan-200 hover:bg-cyan-700/50'
-              }`}
-            >
-              {tech}
-            </span>
+              name={tech}
+              isActive={tag === tech}
+            />
           ))}
         </div>
-
+        
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProjects.map(project => (
             <ProjectCard key={project.slug} project={project} />
           ))}
         </div>
-
+        
         {filteredProjects.length === 0 && (
           <p className="text-cyan-200 text-lg">
-            No projects found {activeFilter !== 'all' ? `using ${activeFilter}` : ''}.
+            No projects found {tag ? `using ${tag}` : ''}.
           </p>
         )}
       </div>
     </main>
   );
+}
+ProjectCard.propTypes = {
+  project: PropTypes.shape({
+    slug: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    summary: PropTypes.string,
+    coverImage: PropTypes.shape({
+      url: PropTypes.string,
+      alt: PropTypes.string,
+    }),
+    technologies: PropTypes.arrayOf(PropTypes.string).isRequired,
+    githubUrl: PropTypes.string,
+    liveUrl: PropTypes.string,
+  }).isRequired,
 };
 
 export default Projects;

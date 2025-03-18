@@ -1,9 +1,12 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import * as signalR from '@microsoft/signalr';
 
 const SignalRContext = createContext();
-
 export const SignalRProvider = ({ children }) => {
+    SignalRProvider.propTypes = {
+        children: PropTypes.node.isRequired,
+    };
     const [userCount, setUserCount] = useState(0);
     const [connection, setConnection] = useState(null);
 

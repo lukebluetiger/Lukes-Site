@@ -161,8 +161,7 @@ const BlogPost = () => {
                         {post.tags.map(tag => (
                           <Tag 
                             key={tag} 
-                            name={tag} 
-                            // If you prefer using onClick, you can adjust the Tag component accordingly
+                            name={tag}
                           />
                         ))}
                       </div>

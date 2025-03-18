@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const CodeBlock = ({ language, code }) => {
   // For OCaml, let's use a more structured approach using tokens
@@ -261,6 +262,10 @@ const CodeBlock = ({ language, code }) => {
       }
     </pre>
   );
+};
+CodeBlock.propTypes = {
+  language: PropTypes.string.isRequired,
+  code: PropTypes.string.isRequired,
 };
 
 export default CodeBlock;
