@@ -1,4 +1,4 @@
-# Luke's Developer Portfolio & Blog
+# My Developer Portfolio & Blog
 
 ![Status](https://img.shields.io/badge/status-live-brightgreen)
 ![Framework](https://img.shields.io/badge/frontend-React-blue)
