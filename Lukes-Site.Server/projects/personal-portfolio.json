@@ -9,6 +9,6 @@
   "coverImageAlt": "Luke's Portfolio Website Screenshot",
   "features": "Custom blog system with tag-based navigation,Project portfolio with filterable showcase,Responsive design with dark theme,Full-stack implementation with .NET backend,Content management system for blog posts",
   "status": "In Development",
-  "startDate": "2024-02-15T00:00:00",
-  "description": "A personal portfolio website that serves as both a project showcase and blogging platform. Built with React for the frontend, utilizing Tailwind CSS for styling, and backed by a .NET API with SQL Server database. Features include a custom blog system with tag filtering, project showcase, and responsive design optimized for all devices."
+  "startDate": "2024-12-15T00:00:00",
+  "description": "A personal portfolio website that serves as both a project showcase and blogging platform. Built with React for the frontend, utilizing Tailwind CSS for styling, and backed by a .NET API . Features include a custom blog system with tag filtering, project showcase, and responsive design optimized for all devices."
 }
