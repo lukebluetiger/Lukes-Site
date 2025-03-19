@@ -3,7 +3,7 @@
   "slug": "ocaml-patterns-meet-poetry",
   "author": "Luke",
   "summary": "A deep dive into the elegant world of OCaml, exploring how functional programming illuminates the fundamental patterns of computation.",
-  "coverImageUrl": "./images/milkyway.jpg",
+  "coverImageUrl": "/images/zion.jpg",
   "coverImageAlt": "Milky Way",
   "content": [
     {
@@ -31,11 +31,11 @@
     {
       "type": "code",
       "language": "ocaml",
-      "content": "type formula =\n  | And of formula * formula\n  | Implies of formula * formula\n  | Or of formula * formula\n  | Not of formula \n  | Prop of string\n  | True\n  | False\n\ntype subst = (string * bool) list\n\n(* Example formulas *)\nlet t1 = Or (Prop \"P\", Not (Prop \"P\"))\nlet t2 = Implies (Prop \"P\", Prop \"P\")\nlet t3 = Or (Implies (Prop \"P\", Prop \"Q\"), Implies (Prop \"Q\", Prop \"P\"))\nlet t4 = Or (Or (Not (Prop \"P\"), Prop \"Q\"), Or (Not (Prop \"Q\", Prop \"P\")))"
+      "content": "type expression =\n  | Conjunction of expression * expression  (* AND *)\n  | Disjunction of expression * expression  (* OR *)\n  | Conditional of expression * expression  (* IF-THEN *)\n  | Negation of expression                  (* NOT *)\n  | Variable of string                      (* Variable *)\n  | Truth                                   (* True constant *)\n  | Falsity                                 (* False constant *)\n\ntype environment = (string * bool) list\n\n(* Example expressions *)\nlet ex1 = Disjunction(Variable \"X\", Negation(Variable \"X\"))\nlet ex2 = Conditional(Variable \"X\", Variable \"X\")\nlet ex3 = Disjunction(Conditional(Variable \"X\", Variable \"Y\"), \n                     Conditional(Variable \"Y\", Variable \"X\"))"
     },
     {
       "type": "paragraph",
-      "content": "The above *formula* type showcases OCaml's ability to model complex logical structures succinctly. With variants and recursive types, expressing intricate relationships becomes intuitive."
+      "content": "The above *expression* type showcases OCaml's ability to model complex logical structures succinctly. With variants and recursive types, expressing intricate relationships becomes intuitive."
     },
     {
       "type": "paragraph",
@@ -44,11 +44,11 @@
     {
       "type": "code",
       "language": "ocaml",
-      "content": "let rec eval_formula (subst: subst) (f: formula) : bool =\n  match f with\n  | And (f1, f2) -> (eval_formula subst f1) && (eval_formula subst f2)\n  | Or (f1, f2) -> (eval_formula subst f1) || (eval_formula subst f2)\n  | Implies (f1, f2) -> (not (eval_formula subst f1)) || (eval_formula subst f2)\n  | Not f -> not (eval_formula subst f)\n  | Prop p -> (List.assoc_opt p subst) = Some true\n  | True -> true\n  | False -> false"
+      "content": "let rec evaluate (env: environment) (expr: expression) : bool =\n  match expr with\n  | Conjunction(e1, e2) -> (evaluate env e1) && (evaluate env e2)\n  | Disjunction(e1, e2) -> (evaluate env e1) || (evaluate env e2)\n  | Conditional(e1, e2) -> (not (evaluate env e1)) || (evaluate env e2)\n  | Negation(e) -> not (evaluate env e)\n  | Variable(v) -> (List.assoc_opt v env) = Some true\n  | Truth -> true\n  | Falsity -> false"
     },
     {
       "type": "paragraph",
-      "content": "This *eval_formula* function leverages pattern matching to evaluate logical expressions based on a given substitution, demonstrating how OCaml can express complex logic with clarity."
+      "content": "This *evaluate* function leverages pattern matching to evaluate logical expressions based on a given environment, demonstrating how OCaml can express complex logic with clarity."
     },
     {
       "type": "paragraph",
@@ -57,11 +57,11 @@
     {
       "type": "code",
       "language": "ocaml",
-      "content": "let apply_twice f x = f (f x)\n\nlet increment = fun y -> y + 1\n\nlet result = apply_twice increment 5  (* result = 7 *)"
+      "content": "let compose f g x = f (g x)\n\nlet double x = x * 2\nlet add_one x = x + 1\n\nlet result = compose double add_one 5  (* result = 12 *)"
     },
     {
       "type": "paragraph",
-      "content": "In this example, *apply_twice* takes a function *f* and applies it twice to the input *x*, showcasing the power and flexibility of higher-order functions in OCaml."
+      "content": "In this example, *compose* takes two functions *f* and *g* and creates a new function that applies *g* first and then *f* to the result, showcasing the power and flexibility of higher-order functions in OCaml."
     },
     {
       "type": "heading",
@@ -75,11 +75,11 @@
     {
       "type": "code",
       "language": "ocaml",
-      "content": "module type IO = sig\n  type ctx\n  val get_line : ctx -> string * ctx\n  val put_line : string -> ctx -> ctx\nend\n\nmodule MakeApp (IO : IO) : sig\n  val run : IO.ctx -> IO.ctx\nend = struct\n  let rec get_num (ctx : IO.ctx) : int * IO.ctx =\n    let (n, ctx) = IO.get_line ctx in\n    match int_of_string_opt n with\n    | None ->\n        let ctx = IO.put_line \"Please enter only digits. Try again.\" ctx in\n        get_num ctx\n    | Some num -> (num, ctx)\n\n  let run ctx =\n    let (num, ctx) = get_num ctx in\n    IO.put_line (\"You entered: \" ^ string_of_int num) ctx\nend"
+      "content": "module type Logger = sig\n  type state\n  val log : string -> state -> state\n  val get_logs : state -> string list\nend\n\nmodule FileLogger : sig\n  val make_logger : string -> (module Logger)\nend = struct\n  let make_logger filename =\n    (module struct\n      type state = string list\n      let log message state = message :: state\n      let get_logs state = List.rev state\n    end : Logger)\nend"
     },
     {
       "type": "paragraph",
-      "content": "The *MakeApp* functor takes an *IO* module adhering to the *IO* signature and produces a new module with a *run* function. This pattern promotes code reuse and separation of concerns, allowing different *IO* implementations to be plugged in seamlessly."
+      "content": "The *FileLogger* module contains a function that returns a new Logger module. This pattern promotes code reuse and separation of concerns, allowing different logging implementations to be created dynamically."
     },
     {
       "type": "paragraph",
@@ -106,11 +106,11 @@
     {
       "type": "code",
       "language": "ocaml",
-      "content": "type 'a ltree =\n  | Leaf of 'a\n  | Branch of 'a ltree * 'a ltree\n\nlet rec reduce_ltree (f: 'a -> 'b) (e: 'b -> 'b -> 'b) (tr: 'a ltree) : 'b =\n  match tr with\n  | Leaf v -> f v\n  | Branch (lt, rt) ->\n      let left_result = reduce_ltree f e lt in\n      let right_result = reduce_ltree f e rt in\n      e left_result right_result\n\n(* Example usage: Sum all integers in a tree *)\nlet sum_tree tr =\n  reduce_ltree (fun v -> v) ( + ) tr\n\n(* Constructing a sample tree *)\nlet sample_tree =\n  Branch (\n    Leaf 1,\n    Branch (\n      Leaf 2,\n      Leaf 3\n    )\n  )\n\nlet total = sum_tree sample_tree  (* total = 6 *)"
+      "content": "type 'a binary_tree =\n  | Empty\n  | Node of 'a * 'a binary_tree * 'a binary_tree\n\nlet rec fold_tree (f: 'a -> 'b -> 'b -> 'b) (empty_value: 'b) (tree: 'a binary_tree) : 'b =\n  match tree with\n  | Empty -> empty_value\n  | Node(value, left, right) ->\n      let left_result = fold_tree f empty_value left in\n      let right_result = fold_tree f empty_value right in\n      f value left_result right_result\n\n(* Example: Calculate the sum of all values in a tree *)\nlet sum_tree tree =\n  fold_tree (fun value left_sum right_sum -> value + left_sum + right_sum) 0 tree\n\n(* Example tree *)\nlet example_tree =\n  Node(10,\n    Node(5, Empty, Empty),\n    Node(15, \n      Empty,\n      Node(20, Empty, Empty)\n    )\n  )\n\nlet total = sum_tree example_tree  (* total = 50 *)"
     },
     {
       "type": "paragraph",
-      "content": "The *reduce_ltree* function abstracts the recursion pattern, allowing different operations to be performed on the tree by simply changing the functions passed to it."
+      "content": "The *fold_tree* function abstracts the recursion pattern, allowing different operations to be performed on the tree by simply changing the functions passed to it."
     },
     {
       "type": "paragraph",
@@ -119,11 +119,11 @@
     {
       "type": "code",
       "language": "ocaml",
-      "content": "let sieve (n: int) (nums: int list) : int list =\n  List.filter (fun x -> (x mod n <> 0)) nums\n\nlet range (n : int) : int list = List.init (n - 1) (fun i -> i + 1)\n\nlet rec primes_helper nums acc =\n  match nums with\n  | [] -> List.rev acc\n  | p :: ps ->\n      let filtered = sieve p ps in\n      primes_helper filtered (p :: acc)\n\nlet primes n = primes_helper (range n) []"
+      "content": "let is_divisible_by divisor n = n mod divisor = 0\n\nlet filter_multiples prime numbers =\n  List.filter (fun n -> not (is_divisible_by prime n)) numbers\n\nlet rec find_primes candidates primes =\n  match candidates with\n  | [] -> List.rev primes\n  | head :: tail ->\n      if head * head > List.hd candidates then\n        List.rev primes @ candidates\n      else\n        find_primes (filter_multiples head tail) (head :: primes)\n\nlet generate_primes_up_to n =\n  if n < 2 then []\n  else\n    let candidates = List.init (n-1) (fun i -> i+2) in\n    find_primes candidates []"
     },
     {
       "type": "paragraph",
-      "content": "This implementation of the Sieve of Eratosthenes efficiently generates prime numbers by iteratively filtering out multiples of each prime."
+      "content": "This implementation efficiently generates prime numbers using a sieve approach, filtering out multiples of each prime number found."
     },
     {
       "type": "heading",
@@ -187,7 +187,7 @@
     "readingTime": "8 min read",
     "views": 0,
     "featured": true,
-    "publishedDate": "2024-04-27",
+    "publishedDate": "2025-03-16",
     "categories": ["Programming", "Functional Programming", "OCaml"]
   }
 }

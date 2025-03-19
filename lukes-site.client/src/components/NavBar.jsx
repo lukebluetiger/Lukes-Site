@@ -19,7 +19,7 @@ function NavBar() {
                         />
                     </Link>
                     <Link to="/" className="text-[#34E4EA] no-underline">
-                        lukebluetiger-dev
+                        luke-matuza-dev
                     </Link>
                 </div>
 
@@ -27,8 +27,6 @@ function NavBar() {
                 <div className="hidden lg:flex items-center gap-4">
                     <nav className="flex items-center gap-4 text-[#d3feff]">
                         <Link to="/" className="hover:italic no-underline">home</Link>
-                        <span>|</span>
-                        <Link to="/about" className="hover:italic no-underline">about</Link>
                         <span>|</span>
                         <Link to="/projects" className="hover:italic no-underline">projects</Link>
                         <span>|</span>
@@ -55,13 +53,6 @@ function NavBar() {
                         onClick={() => setIsMenuOpen(false)}
                     >
                         home
-                    </Link>
-                    <Link
-                        to="/about"
-                        className="block py-2 hover:italic hover:bg-[#161f21] transition-colors duration-200 no-underline"
-                        onClick={() => setIsMenuOpen(false)}
-                    >
-                        about
                     </Link>
                     <Link
                         to="/projects"
